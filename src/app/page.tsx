@@ -1,69 +1,47 @@
 import Image from "next/image";
 
+const NavArrow = () => <Image className="nav-arrow" src="/images/nav-dropdown.svg" width={13} height={7} alt="" aria-hidden="true" />;
+function Button({ children, secondary = false, arrow = "diagonal" }: { children: React.ReactNode; secondary?: boolean; arrow?: "diagonal" | "right" | "phone" }) {
+  const arrowSrc = arrow === "phone" ? "/images/phone.svg" : arrow === "right" ? "/images/arrow-right.svg" : secondary ? "/images/arrow-diagonal-white.svg" : "/images/arrow-diagonal.svg";
+  return <a className={`pill-button${secondary ? " pill-button--secondary" : ""}`} href="#contact"><span>{children}</span><span className="button-arrow" aria-hidden="true"><Image className="button-arrow-icon" src={arrowSrc} width={24} height={24} alt="" /></span></a>;
+}
+
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+  return <main>
+    <header className="site-header">
+      <div className="utility-bar"><a className="utility-phone" href="tel:3462302811"><span className="utility-phone-label">Call us today:</span><span className="utility-phone-number">(346) 230-2811</span></a><div className="socials" aria-label="Social media"><a href="#" aria-label="Facebook"><Image src="/images/facebook.svg" width={25} height={25} alt="" /></a><a href="#" aria-label="X"><Image src="/images/twitter.svg" width={25} height={25} alt="" /></a><a href="#" aria-label="Instagram"><Image src="/images/instagram.svg" width={26} height={25} alt="" /></a><a href="#" aria-label="LinkedIn"><Image src="/images/linkedin.svg" width={25} height={25} alt="" /></a></div></div>
+      <nav className="nav-wrap" aria-label="Main navigation">
+        <div className="nav-side nav-left"><a className="nav-link nav-link--active" href="#" aria-current="page">Home</a><a className="nav-link" href="#about"><span>About us</span><NavArrow /></a><a className="nav-link" href="#"><span>Pediatric dentistry</span><NavArrow /></a><a className="nav-link" href="#"><span>Services</span><NavArrow /></a><a className="nav-link" href="#"><span>For parents</span><NavArrow /></a></div>
+        <a className="brand" href="#" aria-label="Big Picture Pediatric Dentistry home"><Image className="header-logo" src="/images/header-logo.png" width={306} height={194} alt="Big Picture Pediatric Dentistry — focusing on your child’s health" priority /></a>
+        <div className="nav-side nav-right"><a href="#">Blog</a><a href="#">Membership</a><a href="#contact">Contact</a><Button>Request an appointment</Button></div>
+      </nav>
+    </header>
+    <section className="hero">
+      <Image src="/images/hero-high-five.jpg" fill priority sizes="100vw" alt="Dr. Jason Brock high-fiving a young patient" /><div className="hero-shade" />
+      <div className="hero-content"><p className="eyebrow">Loved by kids and parents alike</p><h1>Big Picture<br />Pediatric Dentistry</h1><p>Proudly serving the smiles in and around Houston, Clear Lake, League City, and Friendswood, TX</p><div className="hero-actions"><Button>Request an appointment</Button><Button secondary arrow="phone">Call us: (346) 230-2811</Button></div></div>
+      <div className="curve curve--blue" /><div className="curve curve--cream" />
+    </section>
+    <section className="about section" id="about">
+      <div className="tooth-seal"><Image src="/images/logo.png" width={99} height={99} alt="" /></div>
+      <div className="section-heading"><p className="eyebrow">About Us</p><h2>Pediatric Dentist In Houston, TX</h2></div>
+      <p className="intro">At our office serving Clear Lake and Houston, our welcoming team at Big Picture Pediatric Dentistry provides a patient experience that goes beyond dentistry. With a proactive, compassionate approach and open communication every step of the way, Dr. Jason Brock and our entire team deliver educational dental care for lifelong oral health. Your child will feel excited to be involved in taking care of their own smile and as a parent, you will feel confident knowing that your little one will receive the highest quality of service while accommodating your budget, lifestyle, and individual needs.</p>
+      <div className="photo-ribbon"><div className="photo-card tall"><Image src="/images/about-1.jpg" fill sizes="25vw" alt="Dr. Jason Brock treating a patient" /></div><div className="photo-card"><Image src="/images/about-2.jpg" fill sizes="25vw" alt="A young patient receiving a dental scan" /></div><div className="photo-card short"><Image src="/images/about-3.jpg" fill sizes="25vw" alt="A smiling young patient holding a new toothbrush" /></div><div className="photo-card"><Image src="/images/about-4.jpg" fill sizes="25vw" alt="A dental team member teaching healthy brushing habits" /></div><div className="photo-card tall"><Image src="/images/about-5.jpg" fill sizes="25vw" alt="A child receiving gentle dental treatment" /></div><Button>Read more about us</Button></div>
+    </section>
+    <section className="doctor-section"><Image className="doctor-copy-mark" src="/images/doctor-small-mark.png" width={71} height={71} alt="" aria-hidden="true" /><div className="doctor-inner">
+      <div className="doctor-copy"><p className="eyebrow">Meet The Doctor</p><h2>Dr. Jason Brock</h2><div className="doctor-bio"><p>Dr. Brock grew up outside of Pittsburgh, Pennsylvania. Although his father was a dentist, he decided to study film-making in college and explore his passion for the arts. After earning a Master of Fine Arts in film production and spending five years in Hollywood, he decided to pursue a career that would allow him to make a positive difference in people’s lives.</p><p>He attended the New York University School of Dentistry, where he received the prestigious NYU Award for Ethics. During dental school, he was active in many organizations, including the American Student Dental Association, and he was a founding member of the NYU Peer Review Board. Dr. Brock completed his residency in pediatric dentistry at UT Houston School of Dentistry and he feels blessed to call Clear Lake his home.</p></div><div className="doctor-actions"><Button>Read more about doctor</Button><Button secondary arrow="right">Meet the team</Button></div></div>
+      <div className="doctor-photo-wrap"><Image className="doctor-watermark" src="/images/doctor-watermark.png" width={171} height={171} alt="" aria-hidden="true" /><div className="doctor-photo"><Image src="/images/dr-jason-brock.jpg" fill sizes="(max-width: 800px) 80vw, 537px" alt="Dr. Jason Brock" /></div><blockquote><Image className="doctor-quote-mark" src="/images/quote-mark.svg" width={26} height={25} alt="" aria-hidden="true" /><span className="doctor-quote-copy">“We are a caring and compassionate group, and we take pride in delivering quality oral healthcare to children in a safe environment.”</span></blockquote></div>
+    </div></section>
+    <footer className="site-footer" id="contact">
+      <Image className="footer-wave-art" src="/images/footer-wave-polished.svg" width={1920} height={122} sizes="100vw" alt="" aria-hidden="true" />
+      <div className="footer-seal" aria-hidden="true"><span /><Image src="/images/footer-logo.png" width={99} height={99} alt="" /></div>
+      <div className="footer-main">
+        <div className="footer-columns">
+          <section className="footer-appointment"><p className="eyebrow">Don&apos;t Be A Stranger</p><h2>Request an Appointment</h2><form><input name="firstName" aria-label="Full name" placeholder="Full name" /><input name="lastName" aria-label="Last name" placeholder="Last name" /><input name="phone" aria-label="Phone" placeholder="Phone" type="tel" /><input name="email" aria-label="Email" placeholder="Email" type="email" /><select name="service" aria-label="Service" defaultValue=""><option value="" disabled>Which service you’re interested in ?</option></select><textarea name="message" aria-label="Message" placeholder="Message" /><button className="footer-submit" type="submit"><span>Submit Form</span><span className="footer-submit-icon"><Image src="/images/arrow-diagonal.svg" width={24} height={24} alt="" aria-hidden="true" /></span></button></form></section>
+          <section className="footer-center" aria-label="Opening hours"><div className="footer-wordmark"><strong>BIG PICTURE</strong><span>pediatric dentistry</span></div><div className="footer-center-rule" /><h2>Opening Hours</h2><dl className="footer-hours"><div><dt>Monday</dt><i /><dd>7:30am-4:30pm</dd></div><div><dt>Tuesday</dt><i /><dd>7:30am-4:30pm</dd></div><div><dt>Wednesday</dt><i /><dd>7:30am-4:30pm</dd></div><div><dt>Thursday</dt><i /><dd>7:30am-4:30pm</dd></div><div><dt>Friday</dt><i /><dd>7:30am-4:30pm</dd></div><div><dt>Saturday</dt><i /><dd>Closed</dd></div><div><dt>Sunday</dt><i /><dd>Closed</dd></div></dl><p className="footer-closed">Closed on select Mondays or Fridays</p><div className="footer-socials"><a href="#" aria-label="Facebook"><Image src="/images/facebook.svg" width={25} height={25} alt="" /></a><a href="#" aria-label="X"><Image src="/images/twitter.svg" width={25} height={25} alt="" /></a><a href="#" aria-label="Instagram"><Image src="/images/instagram.svg" width={26} height={25} alt="" /></a><a href="#" aria-label="LinkedIn"><Image src="/images/linkedin.svg" width={25} height={25} alt="" /></a></div></section>
+          <section className="footer-contact"><h2>Contact Us</h2><div className="footer-contact-list"><div className="footer-contact-item"><span className="footer-contact-icon"><Image src="/images/footer-phone.svg" width={29} height={29} alt="" /></span><div><strong>Call Us</strong><a href="tel:3462302811">(346) 230-2811</a></div></div><div className="footer-contact-item"><span className="footer-contact-icon"><Image src="/images/footer-email.svg" width={29} height={29} alt="" /></span><div><strong>Email Us</strong><a href="mailto:appointments@bigpicturedds.com">appointments@bigpicturedds.com</a></div></div><div className="footer-contact-item"><span className="footer-contact-icon"><Image src="/images/footer-location.svg" width={29} height={29} alt="" /></span><div><strong>Location</strong><address>17150 El Camino Real<br />Houston, TX 77058</address><small>(We serve patients in the Clear Lake, League City,<br />Houston and Friendswood areas)</small></div></div></div></section>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+        <div className="footer-bottom"><span>© Big Picture Pediatric Dentistry 2026</span><a className="footer-back-to-top" href="#" aria-label="Back to top"><Image src="/images/arrow-up-white.svg" width={18} height={18} alt="" /></a><a href="#">Privacy Policy</a></div>
+      </div>
+    </footer>
+  </main>;
 }
